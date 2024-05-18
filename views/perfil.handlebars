@@ -1,0 +1,46 @@
+<head>
+    <title>Perfil | VITAMED</title>
+    <link rel="stylesheet" href="/css/perfil.css">
+    <link rel="stylesheet" href="/css/main.css">              
+
+</head>
+<header>
+
+    <a href="/cliente" class="logo"><img src="/img/VitaMed.svg" alt="Logo VitaMed" width="15%"></a>
+
+    <nav>
+        <a href="/cliente">PÁGINA INICIAL</a>
+           
+    </nav>
+
+    <a href="/agendar" id="entrar"><button>AGENDAR CONSULTA</button></a>
+
+</header>  
+<div class="container-pai">
+        <div class="container">
+            <div class="wellcome">
+                <h1>Bem Vindo ao seu perfil!</h1>
+                <div class="dados">
+                    <p>Paciente: {{user.nome}}</p>
+                  
+                </div>
+                <div class="itens">
+                    
+                        <div class="hist-consu">
+                            <h3>Histórico de Consulta</h3>
+                            <div class="espaco"></div>
+                            <div class="consultas"></div>
+                                    <div class="consulta1"><a href="#">Neurologia - 25/03/2024</a></div>
+                                    <div class="consulta1"><a href="#">Psicologia - 25/02/2024</a></div>
+                                    <div class="consulta1"><a href="#">Ortopedia - 25/01/2024</a></div>
+                                    
+
+                            </div>
+                    </div>
+
+                </div>
+        </div>
+    </div>
+
+    
+

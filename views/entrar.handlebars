@@ -1,0 +1,57 @@
+<head>
+<title>Clinica VitaMed | Log-In</title>
+
+<link rel="stylesheet" href="/css/style2.css">
+</head>
+
+</head>
+
+<div class="container">
+        <div class="logo">
+            <img src="/img/VitaMed.svg" alt="">
+            <a href="#">Bem vindo de volta!</a>
+    
+        </div>
+        <h1>Acesse sua conta! 😉</h1>
+        <div class="social-login">
+            
+
+            
+        </div>
+
+        <div class="divider">
+            <div class="line"></div>
+            <p></p>
+            <div class="line"></div>
+        </div>
+
+        <form action="/entrar" method="POST" id="loginForm">
+            <label for="email">Email:</label>
+            <div class="costume-input">
+                <input type="email" name="email" 
+                placeholder="Insira seu Email" title="Insira seu email"
+                autocomplete="off" required>
+                <i class='bx bx-at'></i>
+            </div>
+
+
+            <label for="senha">Senha:</label>
+            <div class="costume-input">
+                <input type="password" name="senha" 
+                placeholder="Insira sua Senha" title="Insira sua Senha" required>
+            <i class="bi bi-eye-fill" id="eye" onclick="mostrarSenha(this, 'senha')"></i>            
+            </div>
+            
+            
+            <button type="submit" class="login"> Login</button>
+            <div class="links">
+                <a href="/recuperar">Refaça sua Senha</a>
+                <a href="/criar">Não tem uma conta?</a>                
+            </div>
+
+            
+        </form>
+       
+    </div>    
+
+    

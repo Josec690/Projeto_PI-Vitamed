@@ -1,0 +1,170 @@
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    background: #FFFFFF;
+}
+
+nav {
+    display: flex;
+    justify-self: center;
+    gap: 20px;
+}
+
+nav a {
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #8AC2CA;
+    transition: 0.2s;
+}
+
+
+button {
+    display: flex;
+    justify-self: center;
+    border: none;
+    background: #A6EAF5;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #00b7d3;
+    border: 2px solid #A6EAF5;
+    color: #fff;
+    transition: 0.5s;
+}
+
+#entrar {
+    text-decoration: none; 
+}
+
+body{
+    background-color: #00b7d3;
+    
+}
+
+
+.container-pai{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #fff;
+    height: auto;
+    width: 90%;
+    margin: 50px auto;
+    border-radius: 40px;
+    flex-direction: row;
+    padding: 20px;
+    overflow: hidden;
+   
+    
+}
+
+.wellcome{
+    width: 100%; 
+    text-align: center; 
+    margin-bottom: 20px; 
+    
+}
+
+
+.itens, .hist-consu, .dados {
+    width: 100%; 
+}
+
+.itens{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hist-consu{
+    background-color: #e6e6e6;
+    height: 70%;
+    max-height: 350px;
+    width: 90%;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    max-width: 600px;
+    margin-top: 20px;
+    overflow-y: auto;
+    overflow-x: hidden; 
+    margin-top: 20px;
+}
+
+.espaco{
+    height: 10px;
+}
+
+.consulta1{
+    background-color: #00b7d3;
+    height: 30px;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.2s ;
+    
+}
+
+.consulta1 a{
+    text-decoration: none;
+    color: inherit;      /* Herda a cor do elemento pai, neste caso #FFFFFF */
+    width: 100%;         /* Faz com que o link ocupe todo o espaço da div */
+    height: 100%;        /* Faz com que o link ocupe toda a altura da div */
+    display: flex;       /* Faz com que os itens internos fiquem alinhados */
+    align-items: center; /* Centraliza verticalmente o conteúdo dentro do link */
+    justify-content: center; /* Centraliza horizontalmente o conteúdo dentro do link */
+    border-radius: 50px;
+}
+
+.consulta1 :hover{
+    background-color: #1ce1ff;
+    color: #000;
+}
+
+
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Empilha os elementos verticalmente */
+        align-items: center; /* Centraliza horizontalmente */
+        padding: 10px;
+    }
+
+    .hist-consu {
+        width: 100%; /* Utiliza toda a largura disponível */
+    }
+
+    .consulta1 {
+        width: 95%; /* Um pouco menos de 100% para garantir o padding */
+    }
+}
+
