@@ -1,4 +1,11 @@
 {
+  "name": "crud_pi",
+  "version": "1.0.0",
+  "description": "Vitamed",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
@@ -13,4 +20,4 @@
     "sequelize": "^6.37.3",
     "session": "^0.1.0"
   }
-}
+}  
