@@ -10,7 +10,7 @@ const session = require('express-session')
 app.engine('handlebars', handlebars({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static('public'))
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -141,7 +141,6 @@ app.get('/prontuario', function(req, res){
     res.render('prontuario')
 })
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`)
+app.listen(8081, function(){
+    console.log('Servidor Ativo!')
 })
