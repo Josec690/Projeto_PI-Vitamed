@@ -22,7 +22,17 @@ const Usuario = banco.sequelize.define('usuarios', {
     senha: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    resetToken: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    tokenExpires: {
+        type: Sequelize.DATE,
+        allowNull: true
     }
+}, {
+    timestamps: false
 })
 
 Usuario.sync({force: false})

@@ -10,13 +10,17 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
     "express-session": "^1.18.0",
     "handlebars": "^4.7.8",
+    "mailtrap": "^3.3.0",
     "mysql2": "^3.9.7",
+    "nodemailer": "^6.9.13",
     "nodemon": "^3.1.0",
     "sequelize": "^6.37.3",
-    "session": "^0.1.0"
+    "session": "^0.1.0",
+    "uuid": "^9.0.1"
   }
-}  
+}

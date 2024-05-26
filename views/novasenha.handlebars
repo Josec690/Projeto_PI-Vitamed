@@ -4,40 +4,36 @@
     
 </head>
 
-<div class="logo">
+<div class="logo">        
+    <a href="/"><img src="/img/VitaMed.png" alt=""> </a>
+</div>
+<div class="container">
+    <h1>Crie sua nova Senha!</h1>
         
-        <a href="/"><img src="/img/VitaMed.png" alt=""> </a>
+    <form action="/novasenha" method="POST">
+        <input type="hidden" name="email" value="{{email}}">
+        <input type="hidden" name="token" value="{{token}}">
 
-    </div>
-    <div class="container">
-        <h1>Crie sua nova Senha!</h1>
-        
-        <form>
-            <label for="password">Informe sua nova senha:</label>
-            <div class="costume-input">
-                <input type="password" name="Senha" id="senha"
-                placeholder="Insira sua nova Senha" title="Insira sua Senha" >
+        <label for="novaSenha">Informe sua nova senha:</label>
+        <div class="costume-input">
+            <input type="password" name="novaSenha"                 placeholder="Insira sua nova Senha" title="Insira sua Senha" required>
                
-                <i class="bi bi-eye-fill" id="eye" onclick="mostrarSenha(this, 'senha')"></i>
-            </div>
-
-
-            <label for="password">Confirme a senha nova:</label>
-            <div class="costume-input">
-                <input type="password" name="Senha" id="senha"
-                placeholder="Confirme a senha nova:" title="Insira sua Senha" >
-                <i class="bi bi-eye-fill" id="eyeConfirmar" onclick="mostrarSenha(this, 'ConfirmarSenha')"></i>
-            
-            </div>
-
-            
-        </form>
-        
-        <a href="/recuperar">
-            <button class="login" id="buton1">Confirmar Senha</button>
-        </a>
-        <div class="links">
-            <a href="/entrar">Acesse sua conta.</a>
-            <a href="/criar">Não tem uma conta?</a>
+            <i class="bi bi-eye-fill" id="eye" onclick="mostrarSenha(this, 'novaSenha')"></i>
         </div>
+
+        <label for="confirmarSenha">Confirme a senha nova:</label>
+        <div class="costume-input">
+            <input type="password" name="confirmarSenha"
+                placeholder="Confirme a senha nova:" title="Confirme sua Senha" required>
+            <i class="bi bi-eye-fill" id="eyeConfirmar" onclick="mostrarSenha(this, 'confirmarSenha')"></i>            
+        </div>
+
+        <button type="submit" class="login">Confirmar Senha</button>
+    </form>        
+        
+    <div class="links">
+        <a href="/entrar">Acesse sua conta.</a>
+        <a href="/criar">Não tem uma conta?</a>
     </div>
+</div>
+
