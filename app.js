@@ -204,6 +204,7 @@ app.get('/criar', function(req, res){
 
 app.post('/criar', async function (req, res) {
     try {        
+        console.log(req.body)
         
         const saltRounds = 10 // Número de rounds para gerar o salt
         
@@ -247,6 +248,89 @@ app.get('/agendar', function(req, res){
 app.get('/prontuario', function(req, res){
     res.render('prontuario')
 })
+
+app.get('/medico', function(req, res){
+    res.render('medico')
+})
+
+app.get('/recepcao', function(req, res){
+    res.render('recepcao')
+})
+
+
+
+app.get('/alterar', (req, res) => {
+    const userId = req.user.id // Supondo que você tenha o ID do usuário na sessão ou JWT
+    
+    // Buscar os dados do usuário no banco de dados
+    User.findById(userId, (err, user) => {
+        if (err) {
+            return res.status(500).send("Erro ao buscar dados do usuário.")
+        }
+        if (!user) {
+            return res.status(404).send("Usuário não encontrado.")
+        }
+        console.log(user) // Verifique se os dados do usuário estão corretos
+        // Renderizar a view 'alterar' passando os dados do usuário
+        res.render('alterar', { user })
+    });
+});
+
+app.post('/alterar', (req, res) => {
+    const userId = req.user.id
+    const { nome, email, telefone, senha } = req.body
+
+    // Atualizar os dados do usuário no banco de dados
+    User.findById(userId, (err, user) => {
+        if (err) {
+            return res.status(500).send("Erro ao buscar dados do usuário.")
+        }
+
+        // Atualizar os campos
+        user.nome = nome
+        user.email = email
+        user.telefone = telefone
+        if (senha) {
+            user.senha = senha // Certifique-se de hashear a senha antes de salvar
+        }
+
+        user.save((err) => {
+            if (err) {
+                return res.status(500).send("Erro ao atualizar dados do usuário.")
+            }
+            res.redirect('/perfil')
+        });
+    });
+});
+
+
+app.post('/alterar', (req, res) => {
+    const userId = req.user.id
+    const { nome, email, telefone, senha } = req.body
+
+    User.findById(userId, async (err, user) => {
+        if (err) {
+            return res.status(500).send("Erro ao buscar dados do usuário.")
+        }
+
+        user.nome = nome
+        user.email = email
+        user.telefone = telefone
+        if (senha) {
+            const hashedSenha = await bcrypt.hash(senha, 10) // Ajuste o fator de custo conforme necessário
+            user.senha = hashedSenha
+        }
+
+        user.save((err) => {
+            if (err) {
+                return res.status(500).send("Erro ao atualizar dados do usuário.")
+            }
+            res.redirect('/perfil')
+        })
+    })
+})
+
+
 
 app.listen(8081, function(){
     console.log('Servidor Ativo!')

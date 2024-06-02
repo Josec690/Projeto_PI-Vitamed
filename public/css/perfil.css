@@ -114,6 +114,9 @@ body{
     margin-top: 20px;
 }
 
+a{
+    margin-left: 10px;
+}
 .espaco{
     height: 10px;
 }

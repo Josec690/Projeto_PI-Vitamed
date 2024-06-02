@@ -1,7 +1,9 @@
 <head>
 <title>Clinica VitaMed | Log-In</title>
-
 <link rel="stylesheet" href="/css/style2.css">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="icon" href="/img/VitaMed.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> 
 </head>
 
 </head>
@@ -37,7 +39,7 @@
 
             <label for="senha">Senha:</label>
             <div class="costume-input">
-                <input type="password" name="senha" 
+                <input type="password" name="senha" id="senha"
                 placeholder="Insira sua Senha" title="Insira sua Senha" required>
             <i class="bi bi-eye-fill" id="eye" onclick="mostrarSenha(this, 'senha')"></i>            
             </div>
@@ -53,5 +55,35 @@
         </form>
        
     </div>    
+
+<script>
+function mostrarSenha(element, fieldId) {
+    const input = document.getElementById(fieldId)
+    if (input.type === "password") {
+        input.type = "text"
+        element.classList.remove("bi-eye-fill")
+        element.classList.add("bi-eye-slash-fill")
+    } else {
+        input.type = "password"
+        element.classList.remove("bi-eye-slash-fill")
+        element.classList.add("bi-eye-fill")
+    }
+}
+</script>
+
+<script>
+    /*document.getElementById('signupForm').addEventListener('submit', function(event) {
+    const senha = document.getElementById('senha').value
+    const confirmarSenha = document.getElementById('confirmarSenha').value
+
+    if (senha.length < 8) {
+        alert('A senha deve ter pelo menos 8 caracteres.')
+        event.preventDefault()
+    } else (senha !== confirmarSenha) {
+        alert('As senhas não coincidem.')
+        event.preventDefault()
+    }
+    })*/
+</script>
 
     

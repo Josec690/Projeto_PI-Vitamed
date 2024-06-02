@@ -18,7 +18,7 @@
     "mailtrap": "^3.3.0",
     "mysql2": "^3.9.7",
     "nodemailer": "^6.9.13",
-    "nodemon": "^3.1.0",
+    "nodemon": "^3.1.2",
     "sequelize": "^6.37.3",
     "session": "^0.1.0",
     "uuid": "^9.0.1"

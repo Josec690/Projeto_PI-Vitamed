@@ -11,11 +11,11 @@ const Usuario = banco.sequelize.define('usuarios', {
         allowNull: false
     },
     telefone: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING(15),
         allowNull: false
     },
     cpf: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(14),
         allowNull: false,
         unique : true
     },

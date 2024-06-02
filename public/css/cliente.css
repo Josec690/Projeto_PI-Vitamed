@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #F8F8F8;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    background: #FFFFFF;
+}
+
+nav {
+    display: flex;
+    justify-self: center;
+    gap: 20px;
+}
+
+nav a {
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #8AC2CA;
+    transition: 0.2s;
+}
+
+button {
+    display: flex;
+    justify-self: center;
+    border: none;
+    background: #A6EAF5;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #FFFFFF;
+    border: 2px solid #A6EAF5;
+    color: #A6EAF5;
+    transition: 0.2s;
+}
+
+.hero-img {
+    background-image: url(/img/Medicos.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 250px 0px ;
+}
+
+.hero-img h1 {
+    font-size: 60px;
+    margin-top: -175px;
+    padding-left: 100px;
+}
+
+.hero-img h2 {
+    font-size: 30px;
+    margin-top: -25px;
+    padding-left: 100px;
+}
+
+.hero-img p {
+    font-size: 20px;
+    margin-top: -5px;
+    margin-bottom: -80px;
+    padding-left: 100px;
+    padding-right: 800px;
+    color: #222222;
+}
+
+.titulos {
+    text-align: center;
+    margin: 150px 500px 90px 500px;
+    border-bottom: 3px solid #8AC2CA;
+}
+
+.container-nossa-clinica {
+    background-color: #FFFFFF;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.info-clinica {
+    padding: 0px 50px;
+}
+
+.info-clinica-img img {
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    box-shadow: -15px 0 50px -5px #8AC2CA;
+}
+
+.container-unidades {
+    width: 950px;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding-bottom: 40px;
+}
+
+
+.container-unidades::-webkit-scrollbar {
+    height: 8px;
+}
+
+.container-unidades::-webkit-scrollbar-thumb {
+    background-color: #8AC2CA;
+    border-radius: 5px;
+}
+
+
+.container-unidades::-webkit-scrollbar-track {
+    background-color: #dcdcdc; 
+    border-radius: 5px;
+}
+
+.unidades {
+    width: 300px;
+    background-color: #FFFFFF;
+    box-shadow: 10px black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.unidades h3, p {
+    padding-left: 20px;
+}
+
+.unidades p {
+    color: #222222;
+}
+
+.container-servicos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.itens {
+    text-align: center;
+    background: #FFFFFF;
+    padding-top: 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.itens h2 {
+    font-size: 20px;
+}
+
+.criar p {
+    text-align: center;
+    margin-left: 180px;
+    margin-right: 180px;
+}
+
+.criar button {
+    font-size: 25px;
+    margin-top: 60px;
+    margin-left: 46%;
+    padding: 10px 20px;
+}
+
+footer {
+    background: #FFFFFF;
+    text-align: center;
+    margin-top: 90px;
+    padding: 100px;
+}
+
+
+#entrar {
+    margin-left: 200px;
+    text-decoration: none;
+}
+
+#criar {
+    text-decoration: none;
+}

@@ -1,0 +1,111 @@
+<head>    
+    <title>VITAMED | ALTERAR</title>
+    <link rel="stylesheet" href="/css/style4.css">
+</head>
+    
+<div class="container">
+    <span class="Crie"> <h1>Altere suas informações! 😉</h1></span>
+    <div class="social-login">
+        
+
+    </div>
+
+    <div class="divider">
+        <div class="line"></div>
+        <p></p>
+        <div class="line"></div>
+    </div>
+
+    <form id="alterarForm" action="/alterar" method="POST">
+
+        <label for="nome">Nome completo:</label>
+            <div class="costume-input">
+                <input type="text" name="nome" value="{{user.nome}}" 
+                placeholder="Insira seu novo Nome completo" title="Insira seu nome"
+                autocomplete="off" required>
+                <i class='bx bx-rename' ></i>
+            </div>
+
+        <label for="email">Email:</label>
+            <div class="costume-input">
+                <input type="email" name="email" value="{{user.email}}"
+                placeholder="Insira seu novo Email" title="Insira seu email"
+                autocomplete="off" required>
+                <i class='bx bx-at'></i>
+            </div>
+
+        
+        <label for="telefone">Telefone:</label>
+            <div class="costume-input">
+                <input type="text" name="telefone" id="telefone" value="{{user.telefone}}" 
+                placeholder="Insira seu novo telefone: (xx) xxxx-xxxx" title="Insira seu telefone"
+                autocomplete="off" required>
+                <i class='bx bx-phone'></i>
+            </div>
+
+        <label for="senha">Nova Senha:</label>
+        <div class="costume-input">
+            <input type="password" name="senha" id="senha"
+            placeholder="Insira sua nova Senha" title="Insira sua Senha" minlength="8" required>
+            
+            <i class="bi bi-eye-fill" id="eye" onclick="mostrarSenha(this, 'senha')"></i>
+        </div>
+
+        
+        <label for="password">Confirmar Nova Senha:</label>
+        <div class="costume-input">
+            <input type="password" name="confirmarSenha" id="confirmarSenha"
+            placeholder="Confirme sua Senha" title="Insira sua Senha" minlength="8" required>
+
+            <i class="bi bi-eye-fill" id="eyeConfirmar" onclick="mostrarSenha(this, 'confirmarSenha')"></i>
+        </div>
+
+
+        <button type="submit" class="login">ALTERAR DADOS</button>
+        <div class="links">
+            <span class="acesse"><a href="/perfil">Acesse seu perfil</a></span>
+        </div>
+
+        
+    </form>
+    
+</div>
+
+<script>
+function validateForm() {
+    const telefone = document.getElementById('telefone').value;
+    console.log("Telefone:", telefone); // Verifica o valor do telefone
+    return true; // Permite o envio do formulário
+}
+$(document).ready(function(){
+    $('#telefone').mask('(00) 00000-0000');    
+});
+
+function mostrarSenha(element, fieldId) {
+    const input = document.getElementById(fieldId)
+    if (input.type === "password") {
+        input.type = "text"
+        element.classList.remove("bi-eye-fill")
+        element.classList.add("bi-eye-slash-fill")
+    } else {
+        input.type = "password"
+        element.classList.remove("bi-eye-slash-fill")
+        element.classList.add("bi-eye-fill")
+    }
+}
+
+document.getElementById('alterarForm').addEventListener('submit', function(event) {
+    const senha = document.getElementById('senha').value
+    const confirmarSenha = document.getElementById('confirmarSenha').value
+
+    if (senha && senha.length < 8) {
+        alert('A senha deve ter pelo menos 8 caracteres.')
+        event.preventDefault()
+    } else (senha !== confirmarSenha) {
+        alert('As senhas não coincidem.')
+        event.preventDefault()
+    }
+})
+</script>
+    
+    

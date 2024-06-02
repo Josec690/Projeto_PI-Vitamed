@@ -12,3 +12,13 @@ container-forms{
     justify-content: center;
     
 }
+
+
+.custom-btn {
+    background-color: #0476bd;
+}
+
+.custom-btn:hover {
+    background-color: #035a8c; /* Cor alterada no hover */
+    text-decoration: underline; /* Adiciona sublinhado no hover */
+}
