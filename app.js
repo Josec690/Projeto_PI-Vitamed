@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt')
 const { Op } = require('sequelize')
 const { v4: uuidv4 } = require('uuid')
 const session = require('express-session')
+const passport = require('./passportConfig')
 
 app.engine('handlebars', handlebars({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
@@ -16,13 +17,14 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-
 app.use(session({
     secret: process.env.SECRET_KEY, // substitua por uma chave secreta segura
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false } // use secure: true se estiver usando HTTPS
 }))
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Configuração do Nodemailer
 const transporter = nodemailer.createTransport({
@@ -34,6 +36,7 @@ const transporter = nodemailer.createTransport({
     }
 })
 
+// Funções de recuperação de senha
 app.get('/recuperar', (req, res) => {
     res.render('recuperar')
 })
@@ -137,66 +140,21 @@ app.post('/novasenha', async (req, res) => {
     }
 })
 
-
+// Rota principal
 app.get('/', function(req, res){
     res.render('index')
 })
 
+// Rotas de autenticação
 app.get('/entrar', function(req, res){
     res.render('entrar')
 })
 
-app.post('/entrar', async function (req, res) {
-    const { email, senha } = req.body
-
-
-    console.log('Dados recebidos no login:', { email, senha })
-
-    if (!email || !senha) {
-        console.log('Email ou senha não fornecidos')
-        return res.json({ success: false, message: 'Email ou senha não fornecidos.' })
-    }
-
-    const isValid = await validarLogin(email, senha)
-
-    if (isValid) {
-        req.session.user = { email } // Salva o email do usuário na sessão
-        res.redirect('/perfil')
-    } else {
-        res.json({ success: false, message: 'Email ou senha incorretos.' })
-    }
-})
-
-async function validarLogin(email, senha) {
-    try {
-        const user = await post.findOne({ where: { email: email } })
-
-
-        console.log('Usuário encontrado:', user)
-
-
-        if (!user) {
-
-            console.log('Usuário não encontrado')
-
-            return false
-        }
-
-        if (!senha) {
-            console.log('Senha não fornecida')
-            return false
-        }
-
-        const isMatch = await bcrypt.compare(senha, user.senha)
-
-        console.log('Resultado da comparação da senha:', isMatch)
-        
-        return isMatch
-    } catch (error) {
-        console.error('Erro ao validar login:', error)
-        return false
-    }
-}
+app.post('/entrar', passport.authenticate('local', {
+    successRedirect: '/perfil',
+    failureRedirect: '/entrar' 
+      
+}))
 
 app.get('/criar', function(req, res){
     res.render('criar')
@@ -225,14 +183,18 @@ app.post('/criar', async function (req, res) {
     }
 })
 
-
-
-app.get('/perfil', async function(req, res) {
-    if (!req.session.user) {
-        return res.redirect('/entrar')
+// Middleware para garantir autenticação
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next()
+    } else {
+        res.redirect('/entrar')
     }
+}
 
-    const user = await post.findOne({ where: { email: req.session.user.email } })
+// Rota do perfil do usuário
+app.get('/perfil', ensureAuthenticated, async function (req, res) {
+    const user = await post.findOne({ where: { email: req.user.email } })
     console.log('Dados do usuário:', user)
     res.render('perfil', { user: user ? user.dataValues : {} })
 })
@@ -257,78 +219,44 @@ app.get('/recepcao', function(req, res){
     res.render('recepcao')
 })
 
-
-
-app.get('/alterar', (req, res) => {
-    const userId = req.user.id // Supondo que você tenha o ID do usuário na sessão ou JWT
-    
-    // Buscar os dados do usuário no banco de dados
-    User.findById(userId, (err, user) => {
-        if (err) {
-            return res.status(500).send("Erro ao buscar dados do usuário.")
-        }
+// Rotas para alterar perfil
+app.get('/alterar', ensureAuthenticated, async (req, res) => {
+    try {
+        const user = await post.findByPk(req.user.id)
         if (!user) {
-            return res.status(404).send("Usuário não encontrado.")
+            return res.status(404).send('Usuário não encontrado')
         }
-        console.log(user) // Verifique se os dados do usuário estão corretos
-        // Renderizar a view 'alterar' passando os dados do usuário
-        res.render('alterar', { user })
-    });
-});
-
-app.post('/alterar', (req, res) => {
-    const userId = req.user.id
-    const { nome, email, telefone, senha } = req.body
-
-    // Atualizar os dados do usuário no banco de dados
-    User.findById(userId, (err, user) => {
-        if (err) {
-            return res.status(500).send("Erro ao buscar dados do usuário.")
-        }
-
-        // Atualizar os campos
-        user.nome = nome
-        user.email = email
-        user.telefone = telefone
-        if (senha) {
-            user.senha = senha // Certifique-se de hashear a senha antes de salvar
-        }
-
-        user.save((err) => {
-            if (err) {
-                return res.status(500).send("Erro ao atualizar dados do usuário.")
-            }
-            res.redirect('/perfil')
-        });
-    });
-});
-
-
-app.post('/alterar', (req, res) => {
-    const userId = req.user.id
-    const { nome, email, telefone, senha } = req.body
-
-    User.findById(userId, async (err, user) => {
-        if (err) {
-            return res.status(500).send("Erro ao buscar dados do usuário.")
-        }
-
-        user.nome = nome
-        user.email = email
-        user.telefone = telefone
-        if (senha) {
-            const hashedSenha = await bcrypt.hash(senha, 10) // Ajuste o fator de custo conforme necessário
-            user.senha = hashedSenha
-        }
-
-        user.save((err) => {
-            if (err) {
-                return res.status(500).send("Erro ao atualizar dados do usuário.")
-            }
-            res.redirect('/perfil')
-        })
-    })
+        res.render('alterar', { user: user.dataValues })
+    } catch (error) {
+        console.error('Erro ao buscar dados do usuário:', error)
+        res.status(500).send('Erro ao buscar dados do usuário')
+    }
 })
+
+app.post('/alterar', ensureAuthenticated, async (req, res) => {
+    const { nome, email, telefone, senha } = req.body
+
+    try {
+        const user = await post.findByPk(req.user.id)
+        if (!user) {
+            return res.status(404).send('Usuário não encontrado')
+        }
+
+        user.nome = nome
+        user.email = email
+        user.telefone = telefone
+        if (senha) {
+            user.senha = await bcrypt.hash(senha, 10)
+        }
+
+        await user.save()
+        res.redirect('/perfil')
+    } catch (error) {
+        console.error('Erro ao atualizar dados do usuário:', error)
+        res.status(500).send('Erro ao atualizar dados do usuário')
+    }
+})
+
 
 
 
