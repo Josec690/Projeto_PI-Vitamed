@@ -34,11 +34,11 @@
 </nav>
 
 <div class="container-forms p-5">
-    <form>
+    <form action="/agendar" method="POST">
         <div class="mb-3">
             <label for="Especialidade" class="form-label">Selecione a Especialidade</label>
-            <input class="form-control" list="especialidades" type="text" placeholder="Escolha uma Especialidade" id="Esp">
-            <datalist id="especialidades">
+            <input class="form-control" list="especialidade" type="text" placeholder="Escolha uma Especialidade" id="Esp" name="especialidade">
+            <datalist id="especialidade">
                 <option value="Oftalmologia"></option>
                 <option value="Ortopedia"></option>
                 <option value="Clinico Geral"></option>
@@ -48,17 +48,31 @@
             </datalist>
         </div>
 
+        <div class="mb-3">
+      <label for="Unidade" class="form-label">Selecione a Unidade Clínica</label>
+      <input class="form-control" list="unidades" type="text" placeholder="Escolha uma Unidade" id="Unidade" name="unidade">
+      <datalist id="unidades">
+        <option value="Unidade Tatuapé"></option>
+        <option value="Unidade Mooca"></option>
+        <option value="Unidade Itaquera"></option>
+        <option value="Unidade São Miguel"></option>
+        <option value="Unidade Guarulhos"></option>
+        <option value="Unidade Penha"></option>
+      </datalist>
+    </div>
+
 
         <div class="mb-3">
-            <label for="Date" class="form-label">Escolha uma data</label>
-            <input type="date" id="Data" class="form-control">
+            <label for="Data" class="form-label">Escolha uma data</label>
+            <input type="datetime-local" id="Data" class="form-control" name="data">
         </div>
     
         <div class="d-grid gap-2">
-            <button type="button" class="btn btn-primary custom-btn">Agendar consulta</button>
+            <button type="submit" class="btn btn-primary custom-btn">Agendar consulta</button>
         </div>
         <div class="form-text">Verifique antes de confirmar sua consulta. 😉</div>
     </form>
-</div>
+</div>  
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

@@ -4,12 +4,24 @@ const app = express()
 const handlebars = require('express-handlebars').engine
 const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
-const post = require('./models/post')
 const bcrypt = require('bcrypt')
 const { Op } = require('sequelize')
 const { v4: uuidv4 } = require('uuid')
 const session = require('express-session')
 const passport = require('./passportConfig')
+const moment = require('moment')
+const post = require('./models/post')
+const Agendamento = require("./models/agendamento")
+
+const banco = require('./models/banco')
+
+banco.sequelize.sync({ force: false })
+    .then(() => {
+        console.log('Tabelas sincronizadas');
+    })
+    .catch((error) => {
+        console.error('Erro ao sincronizar tabelas:', error);
+    });
 
 app.engine('handlebars', handlebars({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
@@ -194,18 +206,81 @@ function ensureAuthenticated(req, res, next) {
 
 // Rota do perfil do usuário
 app.get('/perfil', ensureAuthenticated, async function (req, res) {
-    const user = await post.findOne({ where: { email: req.user.email } })
-    console.log('Dados do usuário:', user)
-    res.render('perfil', { user: user ? user.dataValues : {} })
-})
+    try {
+        const user = await post.findOne({ where: { email: req.user.email } 
+        })
 
+        // Buscar as consultas do usuário
+        const agendamentos = await Agendamento.findAll({
+            where: { userId: req.user.id }
+        })
+               
+
+        res.render('perfil', {
+            user: user ? user.dataValues : {},
+            agendamentos: agendamentos.map(app => app.dataValues) // Passar os dados das consultas para a view
+        }); 
+    } catch (error) {
+        console.error('Erro ao buscar dados do usuário ou consultas:', error)
+        res.status(500).send('Erro ao buscar dados do usuário ou consultas')        
+    }
+})
+/* */
 app.get('/cliente', function(req, res){
     res.render('cliente')
+    if('/perfil', function(req, res){
+        res.render('perfil')
+    })
+    res.render('entrar')
 })
+/* */
 
-app.get('/agendar', function(req, res){
-    res.render('agendar')
-})
+// Renderizar a página de agendamento com os agendamentos do usuário
+app.get('/agendar', ensureAuthenticated, async (req, res) => {
+    try {
+        const agendamentos = await Agendamento.findAll({
+            where: { userId: req.user.id }
+        });
+        res.render('agendar', { agendamentos });
+    } catch (error) {
+        console.error('Erro ao buscar agendamentos:', error);
+        res.status(500).send('Erro ao buscar agendamentos');
+    }
+});
+
+// Endpoint para criar um novo agendamento
+app.post('/agendar', ensureAuthenticated, async (req, res) => {
+    const { especialidade, data, unidade } = req.body;
+    const userId = req.user.id;
+
+    try {
+        // Verificar se já existe um agendamento para o mesmo usuário na mesma data
+        const existeAgendamento = await Agendamento.findOne({
+            where: {
+                userId: userId,
+                data: data,
+                unidade: unidade
+            }
+        });
+
+        if (existeAgendamento) {
+            return res.status(400).send('Você já tem um agendamento nesta data e horário.');
+        }
+
+        // Criar o novo agendamento
+        await Agendamento.create({
+            userId: userId,
+            especialidade: especialidade,
+            data: data,
+            unidade: unidade
+        });
+
+        res.redirect('/agendar');
+    } catch (error) {
+        console.error('Erro ao criar agendamento:', error);
+        res.status(500).send('Erro ao criar agendamento');
+    }
+});
 
 app.get('/prontuario', function(req, res){
     res.render('prontuario')

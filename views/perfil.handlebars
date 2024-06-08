@@ -3,6 +3,7 @@
         <link rel="stylesheet" href="/css/perfil.css">
         <link rel="stylesheet" href="/css/main.css">              
         <link rel="icon" href="/img/VitaMed.png">
+        
     </head>
     <header>
 
@@ -28,15 +29,24 @@
                     <div class="hist-consu">
                         <h3>Histórico de Consulta</h3>
                         <div class="espaco"></div>
-                        <div class="consultas"></div>
-                            <div class="consulta1"><a href="#">Neurologia - 25/03/2024</a></div>
-                            <div class="consulta1"><a href="#">Psicologia - 25/02/2024</a></div>
-                            <div class="consulta1"><a href="#">Ortopedia - 25/01/2024</a></div>                    
+                        <div class="consultas">
+                        {{#if agendamentos.length}}
+                            {{#each agendamentos}}
+                                <div class="consulta1">
+                                    <a href="#">{{this.especialidade}} - {{this.data}} - {{this.unidade}}</a>
+                                </div>
+                            {{/each}}
+                        {{else}}
+                            <p>Você não possui consultas agendadas.</p>
+                        {{/if}}
+                    </div>                    
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    
 
         
 

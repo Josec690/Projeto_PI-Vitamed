@@ -6,5 +6,5 @@ const sequelize = new Sequelize('projeto', 'root', '', {
 
 module.exports = {
     Sequelize: Sequelize,
-    sequelize: sequelize
+    sequelize: sequelize 
 }
