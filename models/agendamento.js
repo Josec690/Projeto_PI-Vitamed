@@ -9,11 +9,7 @@ const Agendamento = banco.sequelize.define('agendamento', {
     especialidade: {
         type: Sequelize.STRING,
         allowNull: false,
-    },
-    unidade: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
+    },    
     data: {
         type: Sequelize.DATE,
         allowNull: false,

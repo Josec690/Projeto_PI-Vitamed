@@ -19,8 +19,7 @@
         <div class="line"></div>
     </div>
 
-    <form id="alterarForm" action="/alterar" method="POST">
-
+    <form id="alterarForm" action="/alterar" method="POST" onsubmit="return validateForm()">
         <label for="nome">Nome completo:</label>
             <div class="costume-input">
                 <input type="text" id="nome" name="nome" value="{{user.nome}}" 
@@ -55,7 +54,7 @@
         </div>
 
         
-        <label for="password">Confirmar Nova Senha:</label>
+        <label for="confirmarSenha">Confirmar Nova Senha:</label>
         <div class="costume-input">
             <input type="password" id="confirmarSenha" name="confirmarSenha" 
             placeholder="(Alteração opcional)" title="Insira sua Senha" minlength="8">
@@ -76,13 +75,22 @@
 
 <script>
 function validateForm() {
-    const telefone = document.getElementById('telefone').value;
-    console.log("Telefone:", telefone); // Verifica o valor do telefone
-    return true; // Permite o envio do formulário
+    const telefone = document.getElementById('telefone').value     
+    const senha = document.getElementById('senha').value;
+    const confirmarSenha = document.getElementById('confirmarSenha').value;
+
+    if (senha.length < 8) {
+        alert('A senha deve ter pelo menos 8 caracteres.');
+        return false;
+    } else if (senha !== confirmarSenha) {
+        alert('As senhas não coincidem.');
+        return false;
+    }
+    return true;    
 }
 
 $(document).ready(function(){
-    $('#telefone').mask('(00) 00000-0000')
+    $('#telefone').mask('(00) 00000-0000')    
 })
 
 function mostrarSenha(element, fieldId) {
@@ -100,19 +108,4 @@ function mostrarSenha(element, fieldId) {
 </script>
 
 
-<script>
-/*
-document.getElementById('alterarForm').addEventListener('submit', function(event) {
-    const senha = document.getElementById('senha').value
-    const confirmarSenha = document.getElementById('confirmarSenha').value
 
-    if (senha && senha.length < 8) {
-        alert('A senha deve ter pelo menos 8 caracteres.')
-        event.preventDefault()
-    } else (senha !== confirmarSenha) {
-        alert('As senhas não coincidem.')
-        event.preventDefault()
-    }
-})
-*/
-</script>  

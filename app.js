@@ -250,7 +250,7 @@ app.get('/agendar', ensureAuthenticated, async (req, res) => {
 
 // Endpoint para criar um novo agendamento
 app.post('/agendar', ensureAuthenticated, async (req, res) => {
-    const { especialidade, data, unidade } = req.body;
+    const { especialidade, data} = req.body;
     const userId = req.user.id;
 
     try {
@@ -258,8 +258,7 @@ app.post('/agendar', ensureAuthenticated, async (req, res) => {
         const existeAgendamento = await Agendamento.findOne({
             where: {
                 userId: userId,
-                data: data,
-                unidade: unidade
+                data: data                
             }
         });
 
@@ -271,8 +270,7 @@ app.post('/agendar', ensureAuthenticated, async (req, res) => {
         await Agendamento.create({
             userId: userId,
             especialidade: especialidade,
-            data: data,
-            unidade: unidade
+            data: data            
         });
 
         res.redirect('/agendar');
@@ -331,9 +329,6 @@ app.post('/alterar', ensureAuthenticated, async (req, res) => {
         res.status(500).send('Erro ao atualizar dados do usuário')
     }
 })
-
-
-
 
 app.listen(port, function(){
     console.log(`Servidor rodando na porta ${port}`)

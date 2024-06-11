@@ -12,7 +12,7 @@
 <div class="container">
     <h1>Crie sua nova Senha!</h1>
         
-    <form action="/novasenha" method="POST">
+    <form id="novoForm" action="/novasenha" method="POST" onsubmit="return validateForm()">
         <input type="hidden" name="email" value="{{email}}">
         <input type="hidden" name="token" value="{{token}}">
 
@@ -40,6 +40,20 @@
 </div>
 
 <script>
+function validateForm() {      
+    const senha = document.getElementById('senha').value;
+    const confirmarSenha = document.getElementById('confirmarSenha').value;
+
+    if (senha.length < 8) {
+        alert('A senha deve ter pelo menos 8 caracteres.');
+        return false;
+    } else if (senha !== confirmarSenha) {
+        alert('As senhas não coincidem.');
+        return false;
+    }
+    return true;    
+}
+
 function mostrarSenha(element, fieldId) {
     const input = document.getElementById(fieldId)
     if (input.type === "password") {
