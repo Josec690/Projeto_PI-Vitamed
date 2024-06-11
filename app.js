@@ -4,14 +4,14 @@ const app = express()
 const handlebars = require('express-handlebars').engine
 const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const { Op } = require('sequelize')
 const { v4: uuidv4 } = require('uuid')
 const session = require('express-session')
 const passport = require('./passportConfig')
-const moment = require('moment')
 const post = require('./models/post')
 const Agendamento = require("./models/agendamento")
+const port = process.env.PORT || 8081
 
 const banco = require('./models/banco')
 
@@ -335,6 +335,7 @@ app.post('/alterar', ensureAuthenticated, async (req, res) => {
 
 
 
-app.listen(8081, function(){
-    console.log('Servidor Ativo!')
+app.listen(port, function(){
+    console.log(`Servidor rodando na porta ${port}`)
 })
+

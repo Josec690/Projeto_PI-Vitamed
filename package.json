@@ -2,12 +2,13 @@
   "name": "crud_pi",
   "version": "1.0.0",
   "description": "Vitamed",
-  "main": "app.js",
+  "main": "app.js",  
   "scripts": {
+    "postinstall": "npm rebuild",
     "start": "node app.js"
   },
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
@@ -15,7 +16,7 @@
     "express-handlebars": "^7.1.2",
     "express-session": "^1.18.0",
     "handlebars": "^4.7.8",
-    "mailtrap": "^3.3.0",    
+    "mailtrap": "^3.3.0",
     "mysql2": "^3.9.7",
     "nodemailer": "^6.9.13",
     "nodemon": "^3.1.3",
