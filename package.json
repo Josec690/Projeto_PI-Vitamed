@@ -2,8 +2,8 @@
   "name": "crud_pi",
   "version": "1.0.0",
   "description": "Vitamed",
-  "main": "app.js",  
-  "scripts": {    
+  "main": "app.js",
+  "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
@@ -16,13 +16,13 @@
     "express-session": "^1.18.0",
     "handlebars": "^4.7.8",
     "mailtrap": "^3.3.0",
-    "mysql2": "^3.9.7",
+    "mysql2": "^3.10.0",
     "nodemailer": "^6.9.13",
     "nodemon": "^3.1.3",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "sequelize": "^6.37.3",
     "session": "^0.1.0",
-    "uuid": "^9.0.1"
+    "uuid": "^10.0.0"
   }
 }
