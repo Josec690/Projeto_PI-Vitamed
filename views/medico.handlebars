@@ -1,0 +1,59 @@
+<head>    
+    <title>Bem Vindo - Doutor</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/medico.css">   
+    <link rel="stylesheet" href="/css/agenda.css"> <!-- Novo CSS para a agenda -->
+    <link rel="icon" href="/img/VitaMed.png">
+</head>
+
+<header>
+    <a href="/medico" class="logo"><img src="/img/VitaMed.svg" alt="Logo VitaMed" width="40%" height="50%"></a>
+    <nav>
+        <h1>Bem vindo Doutor! 😁</h1>
+    </nav>
+</header>
+
+<div class="container-main">
+    <div class="text">
+        <div class="texto">
+            <h1>Consultas da semana</h1>
+        </div>
+        <div class="container-txt">
+            {{#each consultas}}
+            <div class="consul">
+                <a href="#">{{this.consultaId}} - {{this.data}} - {{this.horario}}</a>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="text2">
+        <h2>Gerar novo Prontuário</h2>
+        <div class="container-pront">
+            <label for="prontuario" class="label-in">Selecione uma consulta:</label>
+            <input type="text" placeholder="Selecione uma consulta" class="info" list="prontuario" name="consulta">
+            <datalist id="prontuario">
+                {{#each consultas}}
+                <option value="{{this.consultaId}}">{{this.data}} - {{this.horario}}</option>
+                {{/each}}
+            </datalist>
+            <div class="espaco"></div>
+            <a href="/prontuario"><button class="gerar">Gerar Prontuário</button></a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const message = "{{message}}";
+        if (message) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: message,
+                confirmButtonText: 'Ok'
+            });
+        }
+    });
+</script>

@@ -1,0 +1,58 @@
+<head>
+    <title>Clinica VitaMed | Log-In Médico/Recepcionista</title>
+    <link rel="stylesheet" href="/css/style2.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="/img/VitaMed.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<div class="container">
+    <div class="logo">
+        <img src="/img/VitaMed.svg" alt="">
+        <a href="#">Bem vindo de volta!</a>
+    </div>
+    <h1>Acesse sua conta! 😉</h1>
+    <form action="/entrar_medico_recepcionista" method="POST" id="loginForm">
+        <label for="email">Email:</label>
+        <div class="costume-input">
+            <input type="email" name="email" placeholder="Insira seu Email" title="Insira seu email" autocomplete="off" required>
+            <i class='bx bx-at'></i>
+        </div>
+        <label for="senha">Senha:</label>
+        <div class="costume-input">
+            <input type="password" name="senha" id="senha" placeholder="Insira sua Senha" title="Insira sua Senha" required>
+            <i class="bi bi-eye-fill" id="eye" onclick="mostrarSenha(this, 'senha')"></i>
+        </div>
+        <button type="submit" class="login">Login</button>
+        <div class="links">
+            <a href="/recuperar">Refaça sua Senha</a>
+        </div>
+    </form>
+</div>
+
+<script>
+function mostrarSenha(element, fieldId) {
+    const input = document.getElementById(fieldId)
+    if (input.type === "password") {
+        input.type = "text"
+        element.classList.remove("bi-eye-fill")
+        element.classList.add("bi-eye-slash-fill")
+    } else {
+        input.type = "password"
+        element.classList.remove("bi-eye-slash-fill")
+        element.classList.add("bi-eye-fill")
+    }
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const message = "{{message}}";
+    if (message) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: message,
+            confirmButtonText: 'Ok'
+        });
+    }
+});
+</script>

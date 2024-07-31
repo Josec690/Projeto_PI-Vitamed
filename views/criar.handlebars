@@ -1,0 +1,125 @@
+<head>
+<title>Clinica VitaMed | Criar Conta</title>
+<link rel="stylesheet" href="/css/style4.css">
+<link rel="icon" href="/img/VitaMed.png">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</head>
+
+    <div class="logo">        
+        <a href="/entrar"> <img src="/img/VitaMed.svg" alt=""> </a>
+    </div>
+
+    <div class="container">
+        <span class="Crie"> <h1>Crie sua conta! 😉</h1></span>
+        <div class="social-login">
+           
+
+        </div>
+
+        <div class="divider">
+            <div class="line"></div>
+            <p></p>
+            <div class="line"></div>
+        </div>
+
+        <form id="signupForm" action="/criar" method="POST" onsubmit="return validateForm()">
+
+            <label for="nome">Nome completo:</label>
+            <div class="costume-input">
+                <input type="text" name="nome" 
+                placeholder="Insira seu Nome completo" title="Insira seu nome"
+                autocomplete="off" required>
+                <i class='bx bx-rename' ></i>
+            </div>
+
+            <label for="email">Email:</label>
+            <div class="costume-input">
+                <input type="email" name="email" 
+                placeholder="Insira seu Email" title="Insira seu email"
+                autocomplete="off" required>
+                <i class='bx bx-at'></i>
+            </div>
+
+            
+            <label for="telefone">Telefone:</label>
+            <div class="costume-input">
+                <input type="text" name="telefone" id="telefone"
+                placeholder="Insira seu telefone: (xx) xxxxx-xxxx" title="Insira seu telefone"
+                autocomplete="off" required>
+                <i class='bx bx-phone'></i>
+            </div>
+
+            
+            <label for="cpf">CPF:</label>
+            <div class="costume-input">
+                <input type="text" name="cpf" id="cpf"
+                placeholder="Insira seu CPF" title="Insira seu CPF"
+                autocomplete="off" required>
+                <i class='bx bx-id-card'></i>
+            </div>
+
+
+            <label for="senha">Senha:</label>
+            <div class="costume-input">
+                <input type="password" name="senha" id="senha"
+                placeholder="Insira sua Senha" title="Insira sua Senha" minlength="8" required>               
+                <i class="bi bi-eye-fill" id="eye" onclick="mostrarSenha(this, 'senha')"></i>
+            </div>
+
+            
+            <label for="confirmarSenha">Confirmar Senha:</label>
+            <div class="costume-input">
+                <input type="password" name="confirmarSenha" id="confirmarSenha"
+                placeholder="Confirme sua Senha" title="Insira sua Senha" minlength="8" required>
+                <i class="bi bi-eye-fill" id="eyeConfirmar" onclick="mostrarSenha(this, 'confirmarSenha')"></i>
+            </div>
+            
+
+            <button type="submit" class="login">Criar conta</button>
+
+            <div class="links">
+                <span class="acesse"><a href="/entrar">Acesse sua conta</a></span>
+            </div>
+            
+        </form>
+       
+    </div>   
+
+<script>
+function validateForm() {
+    const telefone = document.getElementById('telefone').value     
+    const senha = document.getElementById('senha').value;
+    const confirmarSenha = document.getElementById('confirmarSenha').value;
+
+    if (senha.length < 8) {
+        alert('A senha deve ter pelo menos 8 caracteres.');
+        return false;
+    } else if (senha !== confirmarSenha) {
+        alert('As senhas não coincidem.');
+        return false;
+    }
+    return true;    
+}
+
+$(document).ready(function(){
+    $('#telefone').mask('(00) 00000-0000');
+    $('#cpf').mask('000.000.000-00');
+});
+
+function mostrarSenha(element, fieldId) {
+    const input = document.getElementById(fieldId)
+    if (input.type === "password") {
+        input.type = "text"
+        element.classList.remove("bi-eye-fill")
+        element.classList.add("bi-eye-slash-fill")
+    } else {
+        input.type = "password"
+        element.classList.remove("bi-eye-slash-fill")
+        element.classList.add("bi-eye-fill")
+    }
+}
+</script>
+

@@ -1,0 +1,25 @@
+import GeneralAPI from "./api/General";
+import TestingAPI from "./api/Testing";
+import { Mail, SendResponse, MailtrapClientConfig } from "../types/mailtrap";
+/**
+ * Mailtrap client class. Initializes instance with available methods.
+ */
+export default class MailtrapClient {
+    private axios;
+    private testInboxId?;
+    private accountId?;
+    private testingAPI;
+    general: GeneralAPI;
+    /**
+     * Initalizes axios instance with Mailtrap params.
+     */
+    constructor({ token, testInboxId, accountId }: MailtrapClientConfig);
+    /**
+     * Getter for testing API. Warns if some of the required keys are missing.
+     */
+    get testing(): TestingAPI;
+    /**
+     * Sends mail with given `mail` params. If there is error, rejects with `MailtrapError`.
+     */
+    send(mail: Mail): Promise<SendResponse>;
+}

@@ -1,0 +1,42 @@
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    background: #FFFFFF;
+    border-bottom: 2px solid #CCCCCC;
+}
+
+.logo img {
+    width: 100%; /* Ajuste para garantir que a imagem se adapte ao contêiner */
+    max-width: 180px; /* Máximo tamanho da logo */
+}
+
+.container-main{
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.container-medicos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 350px;
+    background-color: aquamarine;
+    border-radius: 30px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.medicos{
+    height: 200px;
+    width: 100px;
+    background-color: #CCCCCC;
+    border-radius: 20px;
+}

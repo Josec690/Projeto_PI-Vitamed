@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    width: 100%; /* Assegura que a navbar ocupe toda a largura da tela */
+}
+
+/* Garante que o menu colapsado fique visível e alinhado corretamente */
+.navbar-collapse {
+    justify-content: center; /* Centraliza os itens de navegação horizontalmente */
+}
+
+/* Ajusta a imagem e o título para ficarem bem posicionados em telas pequenas */
+@media (max-width: 768px) {
+    .navbar-brand {
+        margin-left: auto;  /* Centraliza a marca quando o menu está colapsado */
+        margin-right: auto;
+    }
+    img {
+        width: 100px; /* Reduz o tamanho da imagem em telas pequenas */
+        height: 100px;
+    }
+}
+
+.container1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    padding: 30px;
+    background-color: #8AC2CA;
+    background-image: url(/img/Medicos.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.tic1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #0d8a95;
+    margin-bottom: 5px;
+}
+
+.back{
+    background-color: hsla(0, 0%, 80%, 0.750);
+    border-radius: 30px;
+    padding: 15px;
+    margin: 10px;
+}
+
+.subtc1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0d8a95;
+    
+}
+
+.texto1{
+   font-weight: 400;
+}
+
+.container2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    padding: 30px;
+    background-color: #8AC2CA;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    background-image: url(/img/Nossa-Clinica.png);
+    margin-bottom: 80px;
+}
+
+.container3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 25px;
+}
+
+.container4{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+
+button {
+    display: flex;
+    justify-self: center;
+    border: none;
+    background: #d8f5ff;
+    color: #000000;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0d8a95;
+    border: 2px solid #A6EAF5;
+    color: #fff;
+    transition: 0.7s;
+    transform: scale(1.1);
+}
+
+
+.alinb{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icons{
+    text-align: center;
+    background-color: #d8f5ff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: 0.4s;
+    padding: 5px;
+    margin-bottom: 50px;
+    cursor: pointer;
+    
+}
+
+
+.linha{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.icons h2{
+    font-size: 20px;
+}
+
+.icons:hover{
+    background-color: #0d8a95;
+    transition: 0.9s;
+    transform: scale(1.1);
+    border-radius: 5px;
+    color: #fff;
+    
+   
+}
+
+
+
+
+.info-clinica-img img {
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    box-shadow: -15px 0 50px -5px #8AC2CA;
+}
+
+
+.container-servicos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+
+.criar p {
+    text-align: center;
+    margin-left: 180px;
+    margin-right: 180px;
+}
+
+.criar button {
+    font-size: 25px;
+    margin-top: 60px;
+    margin-left: 46%;
+    padding: 10px 20px;
+}
+
+footer {
+    background: #CCCC;
+    text-align: center;
+    margin-top: 90px;
+    padding: 100px;
+}
+
+
+#entrar {
+    margin-left: 200px;
+    text-decoration: none;
+}
+
+#criar {
+    text-decoration: none;
+}
+

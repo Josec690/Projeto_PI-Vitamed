@@ -1,0 +1,55 @@
+    <head>
+        <title>Perfil | VITAMED</title>
+        <link rel="stylesheet" href="/css/perfil.css">
+        <link rel="stylesheet" href="/css/main.css">              
+        <link rel="icon" href="/img/VitaMed.png">
+        <script src="/js/main.js"></script>
+        
+    </head>
+    <header>
+
+        <a href="/cliente" class="logo"><img src="/img/VitaMed.svg" alt="Logo VitaMed" width="15%"></a>
+
+        <nav>
+            <a href="/cliente">PÁGINA INICIAL</a>
+            <a href="/alterar">ALTERAR PERFIL</a>        
+        </nav>
+
+        <a href="/agendar" id="entrar"><button>AGENDAR CONSULTA</button></a>
+
+    </header>  
+    <div class="container-pai">
+        <div class="container">
+            <div class="wellcome">
+                <h1>Bem Vindo ao seu perfil!</h1>
+                <div class="dados">
+                    <p>Paciente: {{user.nome}}</p>
+                    <p>Tel: {{user.telefone}}</p>                
+                </div>
+                <div class="itens">                
+                    <div class="hist-consu">
+                        <h3>Histórico de Consulta</h3>
+                        <div class="espaco"></div>
+                        <div class="consultas">
+                        {{#if agendamentos.length}}
+                            {{#each agendamentos}}
+                                <div class="consulta1">
+                                    <a href="#">{{this.especialidade}} - {{this.data}}</a>
+                                    <button onclick="excluirConsulta({{this.id}})">Excluir</button>
+                                    
+                                </div>
+                            {{/each}}
+                        {{else}}
+                            <p>Você não possui consultas agendadas.</p>
+                        {{/if}}
+                        </div>                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+        
+
