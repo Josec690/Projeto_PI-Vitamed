@@ -212,7 +212,6 @@ app.get('/criar', function(req, res){
     res.render('criar')
 })
 
-
 app.post('/criar', async function (req, res) {
     try {        
         console.log(req.body)
