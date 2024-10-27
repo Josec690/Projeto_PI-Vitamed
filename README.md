@@ -11,6 +11,17 @@ Vitamed é um website desenvolvido para agendamento de consultas e exames médic
 O objetivo principal deste projeto é proporcionar aos usuários uma plataforma simples e eficiente para agendar consultas médicas, promovendo uma experiência de usuário amigável e intuitiva. Além disso, o projeto visa aplicar os conhecimentos adquiridos em diversas tecnologias e ferramentas.
 
 
+## 👥 Equipe do Projeto
+
+Este projeto foi realizado com a colaboração dos seguintes membros:
+
+- <a src="https://www.linkedin.com/in/gustavo-morais-arruda/"> Gustavo M. </a>
+- <a src="https://www.linkedin.com/in/joaomaximiano/">João M.</a>
+- <a src="https://www.linkedin.com/in/joseclaudiley/">José C.</a>
+- <a>Mateus S.</a>
+- <a src="https://www.linkedin.com/in/miguelgomescy/">Miguel G.</a>
+
+
 ## 🖱Tecnologias Utilizadas
 
 
