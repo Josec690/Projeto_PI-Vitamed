@@ -1,59 +1,215 @@
-# 🥇Projeto_PI-Vitamed
+# Projeto PI - VitaMed
 
+Sistema web para agendamento de consultas e gestão básica de usuários, com autenticação, área de perfil e fluxo de recuperação de senha por e-mail.
 
+## Objetivo
 
-Vitamed é um website desenvolvido para agendamento de consultas e exames médicos com especialistas. Este projeto foi criado com o objetivo de praticar e desenvolver habilidades em backend e frontend, utilizando as ferramentas e tecnologias aprendidas durante o segundo semestre do curso de Desenvolvimento de Software.
+O projeto foi desenvolvido para prática de desenvolvimento full-stack no contexto acadêmico, com foco em:
 
+- backend com Node.js e Express
+- persistência com MySQL + Sequelize
+- templates server-side com Handlebars
+- deploy em ambiente serverless (Vercel)
 
-## ⚡Objetivo do Projeto
+## Tecnologias
 
+- Node.js
+- Express
+- Express Handlebars
+- Sequelize
+- MySQL (`mysql2`)
+- Passport (autenticação local)
+- Express Session
+- Nodemailer (Mailtrap)
+- Bootstrap + CSS
 
-O objetivo principal deste projeto é proporcionar aos usuários uma plataforma simples e eficiente para agendar consultas médicas, promovendo uma experiência de usuário amigável e intuitiva. Além disso, o projeto visa aplicar os conhecimentos adquiridos em diversas tecnologias e ferramentas.
+## Funcionalidades
 
+- Cadastro e login de usuário
+- Autenticação de sessão
+- Área de perfil
+- Agendamento de consultas
+- Alteração de dados de conta
+- Recuperação de senha por token
 
-## 👥 Equipe do Projeto
+---
 
-Este projeto foi realizado com a colaboração dos seguintes membros:
+## Como rodar localmente
 
-- <a src="https://www.linkedin.com/in/gustavo-morais-arruda/"> Gustavo M. </a>
-- <a src="https://www.linkedin.com/in/joaomaximiano/">João M.</a>
-- <a src="https://www.linkedin.com/in/joseclaudiley/">José C.</a>
-- <a>Mateus S.</a>
-- <a src="https://www.linkedin.com/in/miguelgomescy/">Miguel G.</a>
+### 1) Pré-requisitos
 
+- Node.js 18+ (recomendado)
+- NPM 9+
+- MySQL local (XAMPP, WAMP ou serviço dedicado)
 
-## 🖱Tecnologias Utilizadas
+### 2) Clonar repositório
 
+```bash
+git clone https://github.com/Josec690/Projeto_PI-Vitamed.git
+cd Projeto_PI-Vitamed
+```
 
-- **Linguagem de Programação:** Java
-- **Ferramentas de Design:** Figma
-- **Frontend:** HTML, CSS, Bootstrap, JavaScript, Handlebars
-- **Backend:** Node.js
-- **Banco de Dados:** MySQL
-- **Ambiente de Desenvolvimento:** VSCode
-- **Serviço de Email:** Mailtrap
-- **Controle de Versão:** GitHub
+### 3) Instalar dependências
 
+```bash
+npm install
+```
 
-## ⚙Funcionalidades
+### 4) Configurar variáveis de ambiente
 
+Crie/edite o arquivo `.env` na raiz do projeto com os valores abaixo:
 
-- Cadastro e login de usuários
-- Agendamento de consultas médicas
-- Pesquisa de médicos especialistas por especialidade
-- Visualização de histórico de agendamentos
-- Alteração de perfil
-- Alteração de senha por meio de token enviado ao Mailtrap
+```env
+# Ambiente
+NODE_ENV=development
+APP_URL=http://localhost:8081
 
+# Sessão
+SECRET_KEY=troque-por-uma-chave-forte
 
-### Licença
+# Banco de dados MySQL
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=projeto
+DB_USERNAME=root
+DB_PASSWORD=
 
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+# E-mail (Mailtrap)
+MAILTRAP_HOST=sandbox.smtp.mailtrap.io
+MAILTRAP_PORT=2525
+MAILTRAP_USER=seu-mailtrap-user
+MAILTRAP_PASS=seu-mailtrap-pass
 
+# Opcional: URL única de conexão
+# DATABASE_URL=mysql://usuario:senha@host:porta/banco
 
+# Opcional: SSL para provedores cloud
+# DB_SSL=true
+```
 
-#### Agradecimentos:
+### 5) Criar banco de dados
 
-Agradeço a todos do grupo e professores que contribuíram para a realização deste projeto. 
+No MySQL, crie o banco definido em `DB_NAME` (ex.: `projeto`).
 
+```sql
+CREATE DATABASE projeto;
+```
 
+### 6) Iniciar aplicação
+
+```bash
+npm start
+```
+
+Aplicação local: `http://localhost:8081`
+
+---
+
+## Deploy na Vercel
+
+### 1) Importar o projeto
+
+1. Acesse a Vercel e clique em **Add New > Project**.
+2. Selecione o repositório `Josec690/Projeto_PI-Vitamed`.
+3. Framework preset: **Other**.
+4. Root directory: raiz do repositório.
+
+### 2) Variáveis de ambiente na Vercel
+
+Defina no projeto:
+
+- `NODE_ENV=production`
+- `APP_URL=https://seu-projeto.vercel.app`
+- `SECRET_KEY=<chave-forte>`
+- `MAILTRAP_HOST`
+- `MAILTRAP_PORT`
+- `MAILTRAP_USER`
+- `MAILTRAP_PASS`
+
+Para banco de dados, use **uma** das abordagens:
+
+#### A) URL única (recomendada)
+
+- `DATABASE_URL=mysql://usuario:senha@host:porta/banco`
+
+#### B) Variáveis separadas
+
+- `DB_HOST`
+- `DB_PORT`
+- `DB_NAME`
+- `DB_USERNAME`
+- `DB_PASSWORD`
+
+Se seu provedor exigir SSL, adicione:
+
+- `DB_SSL=true`
+
+### 3) Banco para produção
+
+Vercel **não acessa** banco local (`localhost`/XAMPP). Em produção, use MySQL remoto (ex.: Railway, PlanetScale, Aiven, RDS etc.).
+
+### 4) Redeploy
+
+Sempre que alterar variáveis de ambiente:
+
+1. Salve as variáveis
+2. Execute **Redeploy** no projeto
+
+---
+
+## Estrutura principal
+
+```text
+app.js                # inicialização da aplicação e rotas
+config.js             # configuração de ambiente para DB
+models/               # modelos Sequelize
+routes/               # rotas auxiliares
+views/                # templates Handlebars
+public/               # css, js e imagens estáticas
+vercel.json           # configuração de deploy na Vercel
+```
+
+---
+
+## Contribuição
+
+Contribuições são bem-vindas.
+
+### Fluxo recomendado
+
+1. Faça um fork ou crie uma branch a partir da `main`.
+2. Nomeie a branch de forma clara (`feat/...`, `fix/...`, `chore/...`).
+3. Aplique mudanças pequenas e objetivas.
+4. Teste localmente antes de enviar.
+5. Abra um Pull Request com descrição do problema e da solução.
+
+### Boas práticas para contribuir
+
+- Não subir `.env` nem credenciais
+- Manter compatibilidade com Node/Express atuais do projeto
+- Evitar mudanças grandes sem necessidade
+- Informar no PR qualquer variável nova de ambiente
+
+### Comandos úteis
+
+```bash
+# instalar dependências
+npm install
+
+# rodar projeto
+npm start
+```
+
+---
+
+## Equipe do Projeto
+
+- Gustavo M.
+- João M.
+- José C.
+- Mateus S.
+- Miguel G.
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT. Veja [LICENSE](LICENSE) para mais detalhes.
