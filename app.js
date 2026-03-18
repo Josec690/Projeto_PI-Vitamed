@@ -81,7 +81,8 @@ app.post('/recuperar', async (req, res) => {
 })
 
 async function sendPasswordResetEmail(email, token) {
-    const resetUrl = `http://localhost:8081/verificar?token=${token}&email=${email}`
+    const appUrl = process.env.APP_URL || `http://localhost:${port}`
+    const resetUrl = `${appUrl}/verificar?token=${token}&email=${email}`
 
     // Envie o código de recuperação por email
     const mailOptions = {
@@ -164,7 +165,7 @@ app.get('/entrar', function(req, res){
     res.render('entrar')
 })
 
-app.post('/login_medico', (req, res) => {
+app.post('/login_medico', (req, res, next) => {
     passport.authenticate('local', function(err, user, info) {
         if (err) { return next(err); }
         if (!user) {
@@ -181,7 +182,7 @@ app.get('/login_recepcionista', (req, res) => {
     res.render('login_recepcionista');
 })
 
-app.post('/login_recepcionista', (req, res) => {
+app.post('/login_recepcionista', (req, res, next) => {
     passport.authenticate('local', function(err, user, info) {
         if (err) { return next(err); }
         if (!user) {
@@ -382,8 +383,8 @@ app.post('/login_medico_recepcionista', function(req, res, next) {
         }
         req.logIn(user, function(err) {
             if (err) { return next(err); }
-            console.log(`Usuário autenticado: ${user.username}, Papel: ${user.role}`);
-            switch (user.role) {
+            console.log(`Usuário autenticado: ${user.email}, Papel: ${user.tipo}`);
+            switch (user.tipo) {
                 case 'medico':
                     return res.redirect('/login_medico');
                 case 'recepcionista':
@@ -395,76 +396,15 @@ app.post('/login_medico_recepcionista', function(req, res, next) {
     })(req, res, next);
 });
 
-app.get('/consultas', (req, res) => {
-    Consulta.find({ medico: req.user._id }, (err, consultas) => {
-        if (err) return res.status(500).send(err);
-        res.render('medico', { consultas });
-    });
-});
-
-app.post('/consultas/agendar', (req, res) => {
-    const { pacienteId, data, horario } = req.body;
-    const consulta = new Consulta({
-        medico: req.user._id,
-       
-
- paciente: pacienteId,
-        data,
-        horario,
-        status: 'agendado'
-    });
-
-    consulta.save(err => {
-        if (err) return res.status(500).send(err);
-        res.redirect('/medico');
-    });
-});
-
-app.post('/consultas/alterar', (req, res) => {
-    const { consultaId, status } = req.body;
-
-    Consulta.findByIdAndUpdate(consultaId, { status }, err => {
-        if (err) return res.status(500).send(err);
-        res.redirect('/medico');
-    });
-});
-
-app.get('/cadastro_medico_recepcionista', (req, res) => {
-    res.render('cadastro_medico_recepcionista');
-})
-    
-app.post('/cadastro_medico_recepcionista', async function(req, res) {
-    try {        
-        console.log(req.body);
-        
-        const saltRounds = 10; // Número de rounds para gerar o salt
-        const hashedSenha = await bcrypt.hash(req.body.senha, saltRounds);
-
-        // Verificar se o usuário já existe
-        const userExists = await Postmr.findOne({ where: { email: req.body.email } });
-        if (userExists) {
-            return res.render('cadastro_medico_recepcionista', { message: 'Email já cadastrado' });
-        }
-
-        await Postmr.create({
-            nome: req.body.nome,
-            email: req.body.email,
-            senha: hashedSenha,
-            tipo: req.body.tipo
-        });
-
-        res.redirect('/login_medico_recepcionista');
-    } catch (erro) {
-        res.send('Falha ao cadastrar os dados: ' + erro);
-        console.log('Falha ao cadastrar os dados: ' + erro);
-    }
-});
-    
 app.get('/login_medico', (req, res) => {
     res.render('login_medico');
 });
 
-app.listen(port, function(){
-    console.log(`Servidor rodando na porta ${port}`)
-})
+if (require.main === module) {
+    app.listen(port, function(){
+        console.log(`Servidor rodando na porta ${port}`)
+    })
+}
+
+module.exports = app
 
