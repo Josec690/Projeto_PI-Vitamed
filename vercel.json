@@ -19,7 +19,11 @@
   "functions": {
     "app.js": {
       "maxDuration": 30,
-      "includeFiles": "views/**"
+      "includeFiles": [
+        "views/**",
+        "node_modules/mysql2/**",
+        "node_modules/sequelize/**"
+      ]
     }
   },
   "env": {

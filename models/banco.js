@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize')
+const mysql2 = require('mysql2')
 
 const commonOptions = {
     dialect: 'mysql',
+    dialectModule: mysql2,
     logging: false,
     pool: {
         max: 5,
