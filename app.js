@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const path = require('path')
 const app = express()
 const handlebars = require('express-handlebars').engine
 const bodyParser = require('body-parser')
@@ -14,23 +15,13 @@ const Postmr = require('./models/postmr')
 const Agendamento = require("./models/agendamento")
 const port = process.env.PORT || 8081
 
-const banco = require('./models/banco')
-
-// Sync banco de forma não-bloqueante (roda em background)
-banco.sequelize.sync({ force: false })
-    .then(() => {
-        console.log('Tabelas sincronizadas');
-    })
-    .catch((error) => {
-        console.error('Erro ao sincronizar tabelas:', error);
-    });
-
 // Health check para Vercel
 app.get('/api/health', (req, res) => {
     res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
 app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'handlebars')
 
 app.use('/agendamentos', require('./routes/agendamentos'))

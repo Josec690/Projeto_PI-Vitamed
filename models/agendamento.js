@@ -18,6 +18,4 @@ const Agendamento = banco.sequelize.define('agendamento', {
     timestamps: false
 })
 
-Agendamento.sync({force: false}) 
-
 module.exports = Agendamento

@@ -35,6 +35,4 @@ const Usuario = banco.sequelize.define('usuarios', {
     timestamps: false
 })
 
-Usuario.sync({force: false})
-
 module.exports = Usuario
