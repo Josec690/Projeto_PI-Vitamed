@@ -16,6 +16,7 @@ const port = process.env.PORT || 8081
 
 const banco = require('./models/banco')
 
+// Sync banco de forma não-bloqueante (roda em background)
 banco.sequelize.sync({ force: false })
     .then(() => {
         console.log('Tabelas sincronizadas');
@@ -23,6 +24,11 @@ banco.sequelize.sync({ force: false })
     .catch((error) => {
         console.error('Erro ao sincronizar tabelas:', error);
     });
+
+// Health check para Vercel
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 
 app.engine('handlebars', handlebars({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
@@ -32,21 +38,21 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(session({
-    secret: process.env.SECRET_KEY, // substitua por uma chave secreta segura
+    secret: process.env.SECRET_KEY || 'dev-secret-key-change-in-production',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // use secure: true se estiver usando HTTPS
+    cookie: { secure: false }
 }))
 app.use(passport.initialize())
 app.use(passport.session())
 
-// Configuração do Nodemailer
+// Configuração do Nodemailer (com fallback seguro)
 const transporter = nodemailer.createTransport({
-    host: process.env.MAILTRAP_HOST,
-    port: process.env.MAILTRAP_PORT,
+    host: process.env.MAILTRAP_HOST || 'localhost',
+    port: process.env.MAILTRAP_PORT || 2525,
     auth: {
-        user: process.env.MAILTRAP_USER,
-        pass: process.env.MAILTRAP_PASS
+        user: process.env.MAILTRAP_USER || '',
+        pass: process.env.MAILTRAP_PASS || ''
     }
 })
 
