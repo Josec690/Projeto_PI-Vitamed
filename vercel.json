@@ -16,12 +16,6 @@
       "dest": "/app.js"
     }
   ],
-  "functions": {
-    "app.js": {
-      "maxDuration": 30,
-      "includeFiles": "views/**"
-    }
-  },
   "env": {
     "NODE_ENV": "production"
   }
