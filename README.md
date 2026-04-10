@@ -103,57 +103,6 @@ npm start
 
 Aplicação local: `http://localhost:8081`
 
----
-
-## Deploy na Vercel
-
-### 1) Importar o projeto
-
-1. Acesse a Vercel e clique em **Add New > Project**.
-2. Selecione o repositório `Josec690/Projeto_PI-Vitamed`.
-3. Framework preset: **Other**.
-4. Root directory: raiz do repositório.
-
-### 2) Variáveis de ambiente na Vercel
-
-Defina no projeto:
-
-- `NODE_ENV=production`
-- `APP_URL=https://seu-projeto.vercel.app`
-- `SECRET_KEY=<chave-forte>`
-- `MAILTRAP_HOST`
-- `MAILTRAP_PORT`
-- `MAILTRAP_USER`
-- `MAILTRAP_PASS`
-
-Para banco de dados, use **uma** das abordagens:
-
-#### A) URL única (recomendada)
-
-- `DATABASE_URL=mysql://usuario:senha@host:porta/banco`
-
-#### B) Variáveis separadas
-
-- `DB_HOST`
-- `DB_PORT`
-- `DB_NAME`
-- `DB_USERNAME`
-- `DB_PASSWORD`
-
-Se seu provedor exigir SSL, adicione:
-
-- `DB_SSL=true`
-
-### 3) Banco para produção
-
-Vercel **não acessa** banco local (`localhost`/XAMPP). Em produção, use MySQL remoto (ex.: Railway, PlanetScale, Aiven, RDS etc.).
-
-### 4) Redeploy
-
-Sempre que alterar variáveis de ambiente:
-
-1. Salve as variáveis
-2. Execute **Redeploy** no projeto
 
 ---
 
